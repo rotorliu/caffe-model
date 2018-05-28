@@ -12,22 +12,39 @@ input_shape {
   dim: 3
 }
 
-################ resnext101-64x4d ################
+################## resnext101-64x4d #################
 layer {
   name: "conv1"
   type: "Convolution"
   bottom: "data"
   top: "conv1"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 64
-    bias_term: true
-    pad: 3
     kernel_size: 7
     stride: 2
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 3
+    bias_term: false
+  }
+}
+layer {
+  name: "conv1_scale"
+  bottom: "conv1"
+  top: "conv1"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -54,16 +71,34 @@ layer {
   type: "Convolution"
   bottom: "pool1"
   top: "resx1_conv1"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx1_conv1_scale"
+  bottom: "resx1_conv1"
+  top: "resx1_conv1"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -77,17 +112,35 @@ layer {
   type: "Convolution"
   bottom: "resx1_conv1"
   top: "resx1_conv2"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 1
     kernel_size: 3
-    group: 64
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    group: 64
+    pad: 1
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx1_conv2_scale"
+  bottom: "resx1_conv2"
+  top: "resx1_conv2"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -101,16 +154,34 @@ layer {
   type: "Convolution"
   bottom: "resx1_conv2"
   top: "resx1_conv3"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx1_conv3_scale"
+  bottom: "resx1_conv3"
+  top: "resx1_conv3"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -118,16 +189,34 @@ layer {
   type: "Convolution"
   bottom: "pool1"
   top: "resx1_match_conv"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx1_match_conv_scale"
+  bottom: "resx1_match_conv"
+  top: "resx1_match_conv"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -151,16 +240,34 @@ layer {
   type: "Convolution"
   bottom: "resx1_elewise"
   top: "resx2_conv1"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx2_conv1_scale"
+  bottom: "resx2_conv1"
+  top: "resx2_conv1"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -174,17 +281,35 @@ layer {
   type: "Convolution"
   bottom: "resx2_conv1"
   top: "resx2_conv2"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 1
     kernel_size: 3
-    group: 64
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    group: 64
+    pad: 1
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx2_conv2_scale"
+  bottom: "resx2_conv2"
+  top: "resx2_conv2"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -198,16 +323,34 @@ layer {
   type: "Convolution"
   bottom: "resx2_conv2"
   top: "resx2_conv3"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx2_conv3_scale"
+  bottom: "resx2_conv3"
+  top: "resx2_conv3"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -231,16 +374,34 @@ layer {
   type: "Convolution"
   bottom: "resx2_elewise"
   top: "resx3_conv1"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx3_conv1_scale"
+  bottom: "resx3_conv1"
+  top: "resx3_conv1"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -254,17 +415,35 @@ layer {
   type: "Convolution"
   bottom: "resx3_conv1"
   top: "resx3_conv2"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 1
     kernel_size: 3
-    group: 64
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    group: 64
+    pad: 1
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx3_conv2_scale"
+  bottom: "resx3_conv2"
+  top: "resx3_conv2"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -278,16 +457,34 @@ layer {
   type: "Convolution"
   bottom: "resx3_conv2"
   top: "resx3_conv3"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   convolution_param {
     num_output: 256
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx3_conv3_scale"
+  bottom: "resx3_conv3"
+  top: "resx3_conv3"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -311,16 +508,34 @@ layer {
   type: "Convolution"
   bottom: "resx3_elewise"
   top: "resx4_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx4_conv1_scale"
+  bottom: "resx4_conv1"
+  top: "resx4_conv1"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -334,17 +549,35 @@ layer {
   type: "Convolution"
   bottom: "resx4_conv1"
   top: "resx4_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 1
     kernel_size: 3
-    group: 64
     stride: 2
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    group: 64
+    pad: 1
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx4_conv2_scale"
+  bottom: "resx4_conv2"
+  top: "resx4_conv2"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -358,16 +591,33 @@ layer {
   type: "Convolution"
   bottom: "resx4_conv2"
   top: "resx4_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+layer {
+  name: "resx4_conv3_scale"
+  bottom: "resx4_conv3"
+  top: "resx4_conv3"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -375,16 +625,33 @@ layer {
   type: "Convolution"
   bottom: "resx3_elewise"
   top: "resx4_match_conv"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 2
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+layer {
+  name: "resx4_match_conv_scale"
+  bottom: "resx4_match_conv"
+  top: "resx4_match_conv"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -408,16 +675,33 @@ layer {
   type: "Convolution"
   bottom: "resx4_elewise"
   top: "resx5_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+layer {
+  name: "resx5_conv1_scale"
+  bottom: "resx5_conv1"
+  top: "resx5_conv1"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -431,17 +715,34 @@ layer {
   type: "Convolution"
   bottom: "resx5_conv1"
   top: "resx5_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 1
     kernel_size: 3
-    group: 64
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    group: 64
+    pad: 1
+    bias_term: false
+  }
+}
+layer {
+  name: "resx5_conv2_scale"
+  bottom: "resx5_conv2"
+  top: "resx5_conv2"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -455,16 +756,33 @@ layer {
   type: "Convolution"
   bottom: "resx5_conv2"
   top: "resx5_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+layer {
+  name: "resx5_conv3_scale"
+  bottom: "resx5_conv3"
+  top: "resx5_conv3"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -488,16 +806,34 @@ layer {
   type: "Convolution"
   bottom: "resx5_elewise"
   top: "resx6_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx6_conv1_scale"
+  bottom: "resx6_conv1"
+  top: "resx6_conv1"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -511,17 +847,35 @@ layer {
   type: "Convolution"
   bottom: "resx6_conv1"
   top: "resx6_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 1
     kernel_size: 3
-    group: 64
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    group: 64
+    pad: 1
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx6_conv2_scale"
+  bottom: "resx6_conv2"
+  top: "resx6_conv2"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -535,16 +889,34 @@ layer {
   type: "Convolution"
   bottom: "resx6_conv2"
   top: "resx6_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx6_conv3_scale"
+  bottom: "resx6_conv3"
+  top: "resx6_conv3"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -568,16 +940,34 @@ layer {
   type: "Convolution"
   bottom: "resx6_elewise"
   top: "resx7_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx7_conv1_scale"
+  bottom: "resx7_conv1"
+  top: "resx7_conv1"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -591,17 +981,35 @@ layer {
   type: "Convolution"
   bottom: "resx7_conv1"
   top: "resx7_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 1
     kernel_size: 3
-    group: 64
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    group: 64
+    pad: 1
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx7_conv2_scale"
+  bottom: "resx7_conv2"
+  top: "resx7_conv2"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -615,16 +1023,34 @@ layer {
   type: "Convolution"
   bottom: "resx7_conv2"
   top: "resx7_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 512
-    bias_term: true
-    pad: 0
     kernel_size: 1
     stride: 1
-    bias_filler {
-      type: "constant"
-      value: 0.0
-    }
+    pad: 0
+    bias_term: false
+  }
+}
+
+layer {
+  name: "resx7_conv3_scale"
+  bottom: "resx7_conv3"
+  top: "resx7_conv3"
+  type: "Scale"
+  scale_param {
+    bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -633,8 +1059,6 @@ layer {
   bottom: "resx6_elewise"
   bottom: "resx7_conv3"
   top: "resx7_elewise"
-  propagate_down: false
-  propagate_down: false
   eltwise_param {
     operation: SUM
   }
@@ -650,21 +1074,34 @@ layer {
   type: "Convolution"
   bottom: "resx7_elewise"
   top: "resx8_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
-    bias_term: false
-    pad: 0
     kernel_size: 1
     stride: 1
+    pad: 0
+    bias_term: false
   }
 }
+
 layer {
   name: "resx8_conv1_scale"
-  type: "Scale"
   bottom: "resx8_conv1"
   top: "resx8_conv1"
+  type: "Scale"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -678,22 +1115,35 @@ layer {
   type: "Convolution"
   bottom: "resx8_conv1"
   top: "resx8_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
-    bias_term: false
-    pad: 1
     kernel_size: 3
-    group: 64
     stride: 2
+    group: 64
+    pad: 1
+    bias_term: false
   }
 }
+
 layer {
   name: "resx8_conv2_scale"
-  type: "Scale"
   bottom: "resx8_conv2"
   top: "resx8_conv2"
+  type: "Scale"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -707,21 +1157,34 @@ layer {
   type: "Convolution"
   bottom: "resx8_conv2"
   top: "resx8_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
-    bias_term: false
-    pad: 0
     kernel_size: 1
     stride: 1
+    pad: 0
+    bias_term: false
   }
 }
+
 layer {
   name: "resx8_conv3_scale"
-  type: "Scale"
   bottom: "resx8_conv3"
   top: "resx8_conv3"
+  type: "Scale"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -729,21 +1192,34 @@ layer {
   type: "Convolution"
   bottom: "resx7_elewise"
   top: "resx8_match_conv"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
-    bias_term: false
-    pad: 0
     kernel_size: 1
     stride: 2
+    pad: 0
+    bias_term: false
   }
 }
+
 layer {
   name: "resx8_match_conv_scale"
-  type: "Scale"
   bottom: "resx8_match_conv"
   top: "resx8_match_conv"
+  type: "Scale"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -767,6 +1243,10 @@ layer {
   type: "Convolution"
   bottom: "resx8_elewise"
   top: "resx9_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -783,6 +1263,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx9_conv1_relu"
@@ -795,6 +1283,10 @@ layer {
   type: "Convolution"
   bottom: "resx9_conv1"
   top: "resx9_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -812,6 +1304,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx9_conv2_relu"
@@ -824,6 +1324,10 @@ layer {
   type: "Convolution"
   bottom: "resx9_conv2"
   top: "resx9_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -839,6 +1343,14 @@ layer {
   top: "resx9_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -862,6 +1374,10 @@ layer {
   type: "Convolution"
   bottom: "resx9_elewise"
   top: "resx10_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -878,6 +1394,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx10_conv1_relu"
@@ -890,6 +1414,10 @@ layer {
   type: "Convolution"
   bottom: "resx10_conv1"
   top: "resx10_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -907,6 +1435,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx10_conv2_relu"
@@ -919,6 +1455,10 @@ layer {
   type: "Convolution"
   bottom: "resx10_conv2"
   top: "resx10_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -934,6 +1474,14 @@ layer {
   top: "resx10_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -957,6 +1505,10 @@ layer {
   type: "Convolution"
   bottom: "resx10_elewise"
   top: "resx11_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -973,6 +1525,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx11_conv1_relu"
@@ -985,6 +1545,10 @@ layer {
   type: "Convolution"
   bottom: "resx11_conv1"
   top: "resx11_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1002,6 +1566,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx11_conv2_relu"
@@ -1014,6 +1586,10 @@ layer {
   type: "Convolution"
   bottom: "resx11_conv2"
   top: "resx11_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1029,6 +1605,14 @@ layer {
   top: "resx11_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1052,6 +1636,10 @@ layer {
   type: "Convolution"
   bottom: "resx11_elewise"
   top: "resx12_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1068,6 +1656,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx12_conv1_relu"
@@ -1080,6 +1676,10 @@ layer {
   type: "Convolution"
   bottom: "resx12_conv1"
   top: "resx12_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1097,6 +1697,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx12_conv2_relu"
@@ -1109,6 +1717,10 @@ layer {
   type: "Convolution"
   bottom: "resx12_conv2"
   top: "resx12_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1124,6 +1736,14 @@ layer {
   top: "resx12_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1147,6 +1767,10 @@ layer {
   type: "Convolution"
   bottom: "resx12_elewise"
   top: "resx13_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1163,6 +1787,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx13_conv1_relu"
@@ -1175,6 +1807,10 @@ layer {
   type: "Convolution"
   bottom: "resx13_conv1"
   top: "resx13_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1192,6 +1828,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx13_conv2_relu"
@@ -1204,6 +1848,10 @@ layer {
   type: "Convolution"
   bottom: "resx13_conv2"
   top: "resx13_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1219,6 +1867,14 @@ layer {
   top: "resx13_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1242,6 +1898,10 @@ layer {
   type: "Convolution"
   bottom: "resx13_elewise"
   top: "resx14_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1258,6 +1918,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx14_conv1_relu"
@@ -1270,6 +1938,10 @@ layer {
   type: "Convolution"
   bottom: "resx14_conv1"
   top: "resx14_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1287,6 +1959,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx14_conv2_relu"
@@ -1299,6 +1979,10 @@ layer {
   type: "Convolution"
   bottom: "resx14_conv2"
   top: "resx14_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1314,6 +1998,14 @@ layer {
   top: "resx14_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1337,6 +2029,10 @@ layer {
   type: "Convolution"
   bottom: "resx14_elewise"
   top: "resx15_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1353,6 +2049,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx15_conv1_relu"
@@ -1365,6 +2069,10 @@ layer {
   type: "Convolution"
   bottom: "resx15_conv1"
   top: "resx15_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1382,6 +2090,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx15_conv2_relu"
@@ -1394,6 +2110,10 @@ layer {
   type: "Convolution"
   bottom: "resx15_conv2"
   top: "resx15_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1409,6 +2129,14 @@ layer {
   top: "resx15_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1432,6 +2160,10 @@ layer {
   type: "Convolution"
   bottom: "resx15_elewise"
   top: "resx16_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1448,6 +2180,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx16_conv1_relu"
@@ -1460,6 +2200,10 @@ layer {
   type: "Convolution"
   bottom: "resx16_conv1"
   top: "resx16_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1477,6 +2221,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx16_conv2_relu"
@@ -1489,6 +2241,10 @@ layer {
   type: "Convolution"
   bottom: "resx16_conv2"
   top: "resx16_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1504,6 +2260,14 @@ layer {
   top: "resx16_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1527,6 +2291,10 @@ layer {
   type: "Convolution"
   bottom: "resx16_elewise"
   top: "resx17_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1543,6 +2311,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx17_conv1_relu"
@@ -1555,6 +2331,10 @@ layer {
   type: "Convolution"
   bottom: "resx17_conv1"
   top: "resx17_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1572,6 +2352,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx17_conv2_relu"
@@ -1584,6 +2372,10 @@ layer {
   type: "Convolution"
   bottom: "resx17_conv2"
   top: "resx17_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1599,6 +2391,14 @@ layer {
   top: "resx17_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1622,6 +2422,10 @@ layer {
   type: "Convolution"
   bottom: "resx17_elewise"
   top: "resx18_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1638,6 +2442,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx18_conv1_relu"
@@ -1650,6 +2462,10 @@ layer {
   type: "Convolution"
   bottom: "resx18_conv1"
   top: "resx18_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1667,6 +2483,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx18_conv2_relu"
@@ -1679,6 +2503,10 @@ layer {
   type: "Convolution"
   bottom: "resx18_conv2"
   top: "resx18_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1694,6 +2522,14 @@ layer {
   top: "resx18_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1717,6 +2553,10 @@ layer {
   type: "Convolution"
   bottom: "resx18_elewise"
   top: "resx19_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1733,6 +2573,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx19_conv1_relu"
@@ -1745,6 +2593,10 @@ layer {
   type: "Convolution"
   bottom: "resx19_conv1"
   top: "resx19_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1762,6 +2614,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx19_conv2_relu"
@@ -1774,6 +2634,10 @@ layer {
   type: "Convolution"
   bottom: "resx19_conv2"
   top: "resx19_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1789,6 +2653,14 @@ layer {
   top: "resx19_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1812,6 +2684,10 @@ layer {
   type: "Convolution"
   bottom: "resx19_elewise"
   top: "resx20_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1828,6 +2704,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx20_conv1_relu"
@@ -1840,6 +2724,10 @@ layer {
   type: "Convolution"
   bottom: "resx20_conv1"
   top: "resx20_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1857,6 +2745,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx20_conv2_relu"
@@ -1869,6 +2765,10 @@ layer {
   type: "Convolution"
   bottom: "resx20_conv2"
   top: "resx20_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1884,6 +2784,14 @@ layer {
   top: "resx20_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -1907,6 +2815,10 @@ layer {
   type: "Convolution"
   bottom: "resx20_elewise"
   top: "resx21_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1923,6 +2835,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx21_conv1_relu"
@@ -1935,6 +2855,10 @@ layer {
   type: "Convolution"
   bottom: "resx21_conv1"
   top: "resx21_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1952,6 +2876,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx21_conv2_relu"
@@ -1964,6 +2896,10 @@ layer {
   type: "Convolution"
   bottom: "resx21_conv2"
   top: "resx21_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -1979,6 +2915,14 @@ layer {
   top: "resx21_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2002,6 +2946,10 @@ layer {
   type: "Convolution"
   bottom: "resx21_elewise"
   top: "resx22_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2018,6 +2966,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx22_conv1_relu"
@@ -2030,6 +2986,10 @@ layer {
   type: "Convolution"
   bottom: "resx22_conv1"
   top: "resx22_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2047,6 +3007,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx22_conv2_relu"
@@ -2059,6 +3027,10 @@ layer {
   type: "Convolution"
   bottom: "resx22_conv2"
   top: "resx22_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2074,6 +3046,14 @@ layer {
   top: "resx22_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2097,6 +3077,10 @@ layer {
   type: "Convolution"
   bottom: "resx22_elewise"
   top: "resx23_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2113,6 +3097,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx23_conv1_relu"
@@ -2125,6 +3117,10 @@ layer {
   type: "Convolution"
   bottom: "resx23_conv1"
   top: "resx23_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2142,6 +3138,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx23_conv2_relu"
@@ -2154,6 +3158,10 @@ layer {
   type: "Convolution"
   bottom: "resx23_conv2"
   top: "resx23_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2169,6 +3177,14 @@ layer {
   top: "resx23_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2192,6 +3208,10 @@ layer {
   type: "Convolution"
   bottom: "resx23_elewise"
   top: "resx24_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2208,6 +3228,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx24_conv1_relu"
@@ -2220,6 +3248,10 @@ layer {
   type: "Convolution"
   bottom: "resx24_conv1"
   top: "resx24_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2237,6 +3269,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx24_conv2_relu"
@@ -2249,6 +3289,10 @@ layer {
   type: "Convolution"
   bottom: "resx24_conv2"
   top: "resx24_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2264,6 +3308,14 @@ layer {
   top: "resx24_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2287,6 +3339,10 @@ layer {
   type: "Convolution"
   bottom: "resx24_elewise"
   top: "resx25_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2303,6 +3359,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx25_conv1_relu"
@@ -2315,6 +3379,10 @@ layer {
   type: "Convolution"
   bottom: "resx25_conv1"
   top: "resx25_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2332,6 +3400,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx25_conv2_relu"
@@ -2344,6 +3420,10 @@ layer {
   type: "Convolution"
   bottom: "resx25_conv2"
   top: "resx25_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2359,6 +3439,14 @@ layer {
   top: "resx25_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2382,6 +3470,10 @@ layer {
   type: "Convolution"
   bottom: "resx25_elewise"
   top: "resx26_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2398,6 +3490,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx26_conv1_relu"
@@ -2410,6 +3510,10 @@ layer {
   type: "Convolution"
   bottom: "resx26_conv1"
   top: "resx26_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2427,6 +3531,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx26_conv2_relu"
@@ -2439,6 +3551,10 @@ layer {
   type: "Convolution"
   bottom: "resx26_conv2"
   top: "resx26_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2454,6 +3570,14 @@ layer {
   top: "resx26_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2477,6 +3601,10 @@ layer {
   type: "Convolution"
   bottom: "resx26_elewise"
   top: "resx27_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2493,6 +3621,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx27_conv1_relu"
@@ -2505,6 +3641,10 @@ layer {
   type: "Convolution"
   bottom: "resx27_conv1"
   top: "resx27_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2522,6 +3662,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx27_conv2_relu"
@@ -2534,6 +3682,10 @@ layer {
   type: "Convolution"
   bottom: "resx27_conv2"
   top: "resx27_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2549,6 +3701,14 @@ layer {
   top: "resx27_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2572,6 +3732,10 @@ layer {
   type: "Convolution"
   bottom: "resx27_elewise"
   top: "resx28_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2588,6 +3752,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx28_conv1_relu"
@@ -2600,6 +3772,10 @@ layer {
   type: "Convolution"
   bottom: "resx28_conv1"
   top: "resx28_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2617,6 +3793,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx28_conv2_relu"
@@ -2629,6 +3813,10 @@ layer {
   type: "Convolution"
   bottom: "resx28_conv2"
   top: "resx28_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2644,6 +3832,14 @@ layer {
   top: "resx28_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2667,6 +3863,10 @@ layer {
   type: "Convolution"
   bottom: "resx28_elewise"
   top: "resx29_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2683,6 +3883,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx29_conv1_relu"
@@ -2695,6 +3903,10 @@ layer {
   type: "Convolution"
   bottom: "resx29_conv1"
   top: "resx29_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2712,6 +3924,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx29_conv2_relu"
@@ -2724,6 +3944,10 @@ layer {
   type: "Convolution"
   bottom: "resx29_conv2"
   top: "resx29_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2739,6 +3963,14 @@ layer {
   top: "resx29_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2762,6 +3994,10 @@ layer {
   type: "Convolution"
   bottom: "resx29_elewise"
   top: "resx30_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2778,6 +4014,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx30_conv1_relu"
@@ -2790,6 +4034,10 @@ layer {
   type: "Convolution"
   bottom: "resx30_conv1"
   top: "resx30_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2807,6 +4055,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx30_conv2_relu"
@@ -2819,6 +4075,10 @@ layer {
   type: "Convolution"
   bottom: "resx30_conv2"
   top: "resx30_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 1024
     bias_term: false
@@ -2834,6 +4094,14 @@ layer {
   top: "resx30_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2857,6 +4125,10 @@ layer {
   type: "Convolution"
   bottom: "resx30_elewise"
   top: "resx31_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -2873,6 +4145,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx31_conv1_relu"
@@ -2885,6 +4165,10 @@ layer {
   type: "Convolution"
   bottom: "resx31_conv1"
   top: "resx31_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -2903,6 +4187,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx31_conv2_relu"
@@ -2915,6 +4207,10 @@ layer {
   type: "Convolution"
   bottom: "resx31_conv2"
   top: "resx31_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -2931,12 +4227,24 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx31_match_conv"
   type: "Convolution"
   bottom: "resx30_elewise"
   top: "resx31_match_conv"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -2952,6 +4260,14 @@ layer {
   top: "resx31_match_conv"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -2975,6 +4291,10 @@ layer {
   type: "Convolution"
   bottom: "resx31_elewise"
   top: "resx32_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -2991,6 +4311,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx32_conv1_relu"
@@ -3003,6 +4331,10 @@ layer {
   type: "Convolution"
   bottom: "resx32_conv1"
   top: "resx32_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -3021,6 +4353,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx32_conv2_relu"
@@ -3033,6 +4373,10 @@ layer {
   type: "Convolution"
   bottom: "resx32_conv2"
   top: "resx32_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -3048,6 +4392,14 @@ layer {
   top: "resx32_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -3071,6 +4423,10 @@ layer {
   type: "Convolution"
   bottom: "resx32_elewise"
   top: "resx33_conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -3087,6 +4443,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx33_conv1_relu"
@@ -3099,6 +4463,10 @@ layer {
   type: "Convolution"
   bottom: "resx33_conv1"
   top: "resx33_conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -3117,6 +4485,14 @@ layer {
   scale_param {
     bias_term: true
   }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
 }
 layer {
   name: "resx33_conv2_relu"
@@ -3129,6 +4505,10 @@ layer {
   type: "Convolution"
   bottom: "resx33_conv2"
   top: "resx33_conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
   convolution_param {
     num_output: 2048
     bias_term: false
@@ -3144,6 +4524,14 @@ layer {
   top: "resx33_conv3"
   scale_param {
     bias_term: true
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
+  }
+  param {
+    lr_mult: 0.0
+    decay_mult: 0.0
   }
 }
 layer {
@@ -3269,6 +4657,7 @@ layer {
   }
 }
 
+
 #============== ROI Proposal ===============
 layer {
   name: "rpn_cls_prob"
@@ -3303,6 +4692,7 @@ layer {
     param_str: "'feat_stride': 16"
   }
 }
+
 
 #============ new conv layer ===============
 layer {
@@ -3444,4 +4834,5 @@ layer {
   bottom: "cls_score"
   top: "cls_prob"
 }
+
 
